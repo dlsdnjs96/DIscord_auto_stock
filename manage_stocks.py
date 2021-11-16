@@ -12,12 +12,10 @@ def connect_cpcybos():
 
 
 def getStockInfo_by_code(stock_code):
-    # 현재가 객체 구하기
     objStockMst = win32com.client.Dispatch("DsCbo1.StockMst")
     objStockMst.SetInputValue(0, stock_code)   #종목 코드 - 삼성전자
     objStockMst.BlockRequest()
 
-    # 현재가 통신 및 통신 에러 처리 
     rqStatus = objStockMst.GetDibStatus()
     rqRet = objStockMst.GetDibMsg1()
     if rqStatus != 0:
@@ -49,18 +47,6 @@ def getStockInfo_by_code(stock_code):
     
     return stock_info
     
-    
-    if (exFlag == ord('0')):
-        print("장 구분값: 동시호가와 장중 이외의 시간")
-    elif (exFlag == ord('1')) :
-        print("장 구분값: 동시호가 시간")
-    elif (exFlag == ord('2')):
-        print("장 구분값: 장중 또는 장종료")
-    
-    print("예상체결가 대비 수량")
-    print("예상체결가", exPrice)
-    print("예상체결가 대비", exDiff)
-    print("예상체결수량", exVol)
 
 if __name__ == '__main__':
     sInfo = getStockInfo_by_code('A005930')
